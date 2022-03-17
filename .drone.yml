@@ -18,6 +18,10 @@ steps:
 
 - name: setup-virtualenv
   image: python:3.7-alpine
+  when:
+    event:
+    - push
+    branch: master
   commands:
   - pip install virtualenv
   - virtualenv /tmp/shared/.venv
@@ -29,6 +33,10 @@ steps:
 
 - name: test
   image: python:3.7-alpine
+  when:
+    event:
+    - push
+    branch: master
   commands:
   - source /tmp/shared/.venv/bin/activate
   - python app/tests.py
